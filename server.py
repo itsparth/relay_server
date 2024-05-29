@@ -1,4 +1,5 @@
 import enum
+
 # import usbrelay_py
 import time
 import threading
@@ -7,6 +8,7 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import relay
+
 app = FastAPI()
 
 
@@ -31,19 +33,22 @@ app.add_middleware(
 #     result = usbrelay_py.board_control(board[board], index, 1)
 #     print(f"Turn on: {index} result {result}")
 #     relay.turn_on(index)
-   
+
 # def turnOff(board: int, index: int):
 #     board = boards[board:int]
 #     result = usbrelay_py.board_control(board[board:int], index, 0)
 #     print(f"Turn off: {index} result {result}")
 #     relay.turn_off(index)
 
+
 def turnOn(board: int, index: int):
     relay.turn_on(index)
-   
+
+
 def turnOff(board: int, index: int):
     relay.turn_off(index)
- 
+
+
 def turnOnFor(board: int, index: int, duration: float):
     turnOn(board, index)
     time.sleep(duration)
@@ -68,9 +73,9 @@ class RelayControl(BaseModel):
     duration: float
 
 
-@app.get("/boardsCount")
-def getBoards():
-    return {"count": int(count)}
+# @app.get("/boardsCount")
+# def getBoards():
+#     return {"count": int(count)}
 
 
 @app.post("/control")
